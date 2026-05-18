@@ -1,36 +1,142 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Elav
 
-## Getting Started
+> **El corazón inteligente de tu iglesia**
 
-First, run the development server:
+Plataforma SaaS para iglesias modernas que centraliza presencia digital, comunicación y administración en un solo lugar.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Lenguaje:** TypeScript
+- **Estilos:** TailwindCSS v4
+- **Componentes:** shadcn/ui
+- **Animaciones:** Framer Motion
+- **Íconos:** Lucide Icons
+
+---
+
+## Estructura del proyecto
+
+```
+src/
+├── app/
+│   ├── layout.tsx                  # Layout raíz (metadata, Navbar, Footer)
+│   ├── globals.css                 # Estilos globales + tema (violeta → naranja)
+│   ├── page.tsx                    # Home
+│   ├── plataforma/page.tsx         # Plataforma CRM
+│   ├── sitios-web/page.tsx         # Sitios web
+│   ├── precios/page.tsx            # Precios
+│   ├── nosotros/page.tsx           # Nosotros
+│   └── contacto/page.tsx           # Contacto
+├── components/
+│   ├── layout/
+│   │   ├── navbar.tsx              # Navbar sticky + menú mobile
+│   │   └── footer.tsx              # Footer premium
+│   ├── ui/
+│   │   ├── button.tsx              # Botón con variantes (default, gradient, outline)
+│   │   └── accordion.tsx           # Accordion para FAQ
+│   └── sections/
+│       ├── section-wrapper.tsx     # Wrapper animado reutilizable
+│       ├── dashboard-mockup.tsx    # Mockup dashboard SaaS
+│       ├── websites-mockup.tsx     # Mockup sitios web
+│       ├── analytics-mockup.tsx    # Mockup estadísticas
+│       ├── feature-cards.tsx       # FeatureCard, ProblemCard, PricingCard
+│       ├── cta-section.tsx         # Sección CTA reutilizable
+│       ├── faq-section.tsx         # FAQ con accordion
+│       └── index.ts                # Barrel export
+└── lib/
+    └── utils.ts                    # Utilidad cn() para clases
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Páginas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Página | Ruta | Descripción |
+|--------|------|-------------|
+| Home | `/` | Hero, problemas, plataforma, sitios web, analytics, precios, FAQ, CTA |
+| Plataforma | `/plataforma` | CRM completo: miembros, campus, células, finanzas, formularios, notificaciones, analytics, roles |
+| Sitios Web | `/sitios-web` | Templates, responsive, SEO, velocidad, integración CRM |
+| Precios | `/precios` | 3 planes CRM + 3 sitios web + 2 mantenimiento + FAQ |
+| Nosotros | `/nosotros` | Visión, historia, valores, declaración de creencias |
+| Contacto | `/contacto` | Formulario, WhatsApp, email, demo CTA |
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Identidad visual
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Marca:** Elav
+- **Slogan:** "El corazón inteligente de tu iglesia"
+- **Paleta:** Violeta (`#7c3aed`) → Naranja (`#f59e0b`)
+- **Tipografía:** Geist Sans
+- **Estilo:** SaaS moderno, limpio, minimalista, premium
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## SEO
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Keywords: `software para iglesias`, `plataforma para iglesias`, `gestión para iglesias`, `administración de iglesias`, `sitios web para iglesias`
+- OpenGraph y Twitter Cards configurados
+- Metadata por página
+- `lang="es"` en el HTML raíz
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Pricing
+
+### CRM
+
+| Plan | Precio | Miembros | Admins |
+|------|--------|----------|--------|
+| Start | $29/mes | Hasta 150 | 2 |
+| Grow | $79/mes | Hasta 800 | 8 |
+| Advance | $179/mes | Ilimitados | Ilimitados |
+
+### Sitios Web
+
+| Plan | Precio |
+|------|--------|
+| Landing Start | $390 |
+| Website Pro | $990 |
+| Website Custom | Desde $1,900 |
+
+### Mantenimiento
+
+| Plan | Precio |
+|------|--------|
+| Care Basic | $29/mes |
+| Care Active | $89/mes |
+
+---
+
+## Comandos
+
+```bash
+# Instalar dependencias
+npm install
+
+# Desarrollo
+npm run dev
+
+# Build producción
+npm run build
+
+# Iniciar producción
+npm start
+
+# Lint
+npm run lint
+```
+
+---
+
+## Principios de diseño
+
+- Mucho whitespace
+- Jerarquía tipográfica fuerte
+- Animaciones suaves y livianas (solo fade-in, reveal, hover)
+- Sin glassmorphism excesivo, blur pesado ni animaciones exageradas
+- Responsive total (mobile-first)
+- Performance optimizada (todas las páginas son estáticas)
