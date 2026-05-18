@@ -63,6 +63,13 @@ export function Navbar() {
 
   const logoFilter = isHome && navOpacity < 0.4 ? "brightness(0) invert(1)" : "none";
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (pathname === href) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <motion.header
@@ -82,7 +89,7 @@ export function Navbar() {
         }}
       >
         <nav className="mx-auto max-w-7xl flex items-center justify-between px-6 py-4 lg:px-8">
-          <Link href="/" className="flex items-center shrink-0">
+          <Link href="/" className="flex items-center shrink-0" onClick={(e) => handleNavClick(e, "/")}>
             <Image
               src="/images/logo-transparente.png"
               alt="Elav"
@@ -101,6 +108,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   style={{
                     color: isActive
                       ? `rgb(${blend(124, 124)}, ${blend(58, 58)}, ${blend(237, 237)})`
@@ -158,7 +166,10 @@ export function Navbar() {
                 <Link
                   href="/"
                   className="flex items-center"
-                  onClick={() => setMobileOpen(false)}
+                  onClick={(e) => {
+                    setMobileOpen(false);
+                    handleNavClick(e, "/");
+                  }}
                 >
                   <Image
                     src="/images/logo-transparente.png"
@@ -187,7 +198,10 @@ export function Navbar() {
                   >
                     <Link
                       href={link.href}
-                      onClick={() => setMobileOpen(false)}
+                      onClick={(e) => {
+                        setMobileOpen(false);
+                        handleNavClick(e, link.href);
+                      }}
                       className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors ${
                         pathname === link.href
                           ? "text-[#7c3aed] bg-[#7c3aed]/5"
