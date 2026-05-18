@@ -3,10 +3,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
+  { href: "/", label: "Inicio" },
   { href: "/plataforma", label: "Plataforma" },
   { href: "/sitios-web", label: "Sitios Web" },
   { href: "/precios", label: "Precios" },
@@ -15,11 +18,18 @@ const navLinks = [
 ];
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const [scrollOpacity, setScrollOpacity] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      const y = window.scrollY;
+      const opacity = Math.min(1, Math.max(0, (y - 20) / 80));
+      setScrollOpacity(opacity);
+    };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -35,66 +45,80 @@ export function Navbar() {
     };
   }, [mobileOpen]);
 
+  const navOpacity = isHome ? scrollOpacity : 1;
+
+  const blend = (start: number, end: number) =>
+    Math.round(start + (end - start) * navOpacity);
+
+  const bgColor = `rgba(255, 255, 255, ${(navOpacity * 0.85).toFixed(2)})`;
+  const borderColor = `rgba(228, 228, 231, ${(navOpacity * 0.6).toFixed(2)})`;
+  const shadowOpacity = (navOpacity * 0.04).toFixed(2);
+  const blurAmount = navOpacity > 0.05 ? `${(navOpacity * 12).toFixed(1)}px` : "0px";
+
+  const textSecondary = `rgb(${blend(255, 82)}, ${blend(255, 82)}, ${blend(255, 91)})`;
+  const hamburgerColor = `rgb(${blend(255, 24)}, ${blend(255, 24)}, ${blend(255, 27)})`;
+  const hamburgerHover = navOpacity > 0.5
+    ? "hover:bg-zinc-100"
+    : "hover:bg-white/10";
+
+  const logoFilter = isHome && navOpacity < 0.4 ? "brightness(0) invert(1)" : "none";
+
   return (
     <>
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-white/80 backdrop-blur-xl border-b border-zinc-200/60 shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
-            : "bg-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50"
+        style={{
+          backgroundColor: bgColor,
+          backdropFilter: `blur(${blurAmount})`,
+          WebkitBackdropFilter: `blur(${blurAmount})`,
+          borderBottom: `1px solid ${borderColor}`,
+          boxShadow:
+            navOpacity > 0.5
+              ? `0 1px 3px rgba(0, 0, 0, ${shadowOpacity})`
+              : "none",
+        }}
       >
         <nav className="mx-auto max-w-7xl flex items-center justify-between px-6 py-4 lg:px-8">
-          <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#f59e0b] flex items-center justify-center">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="6" cy="6" r="2.5" fill="white" />
-                  <circle cx="18" cy="6" r="2.5" fill="white" fillOpacity="0.8" />
-                  <circle cx="12" cy="12" r="2.5" fill="white" fillOpacity="0.9" />
-                  <circle cx="6" cy="18" r="2.5" fill="white" fillOpacity="0.7" />
-                  <circle cx="18" cy="18" r="2.5" fill="white" fillOpacity="0.6" />
-                  <line x1="6" y1="6" x2="18" y2="6" stroke="white" strokeWidth="0.8" opacity="0.5" />
-                  <line x1="6" y1="6" x2="12" y2="12" stroke="white" strokeWidth="0.8" opacity="0.4" />
-                  <line x1="18" y1="6" x2="12" y2="12" stroke="white" strokeWidth="0.8" opacity="0.3" />
-                  <line x1="6" y1="18" x2="12" y2="12" stroke="white" strokeWidth="0.8" opacity="0.35" />
-                  <line x1="18" y1="18" x2="12" y2="12" stroke="white" strokeWidth="0.8" opacity="0.25" />
-                </svg>
-              </div>
-              <span className={`text-xl font-bold tracking-tight ${scrolled ? "text-text-primary" : "text-white"}`}>
-                Elav
-              </span>
-            </div>
+          <Link href="/" className="flex items-center shrink-0">
+            <Image
+              src="/images/logo-transparente.png"
+              alt="Elav"
+              width={112}
+              height={28}
+              className="h-7 w-auto"
+              style={{ filter: logoFilter }}
+              priority
+            />
           </Link>
 
           <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  scrolled ? "text-text-secondary" : "text-white/80 hover:text-white"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  style={{
+                    color: isActive
+                      ? `rgb(${blend(124, 124)}, ${blend(58, 58)}, ${blend(237, 237)})`
+                      : textSecondary,
+                  }}
+                  className="text-sm font-medium transition-colors hover:text-[#7c3aed]"
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="hidden lg:flex items-center gap-3">
             <Button
-              variant={scrolled ? "gradient" : "secondary"}
+              variant="gradient"
               size="sm"
-              className={scrolled ? "" : "bg-white/15 text-white hover:bg-white/25 backdrop-blur-sm"}
+              className={isHome && navOpacity < 0.5 ? "opacity-90" : ""}
               asChild
             >
               <Link href="/precios">Empieza gratis</Link>
@@ -103,9 +127,8 @@ export function Navbar() {
 
           <button
             onClick={() => setMobileOpen(true)}
-            className={`lg:hidden p-2 rounded-md transition-colors ${
-              scrolled ? "text-text-primary hover:bg-zinc-100" : "text-white hover:bg-white/10"
-            }`}
+            className={`lg:hidden p-2 rounded-md transition-colors ${hamburgerHover}`}
+            style={{ color: hamburgerColor }}
             aria-label="Abrir menú"
           >
             <Menu className="h-6 w-6" />
@@ -132,17 +155,18 @@ export function Navbar() {
               className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-white shadow-2xl"
             >
               <div className="flex items-center justify-between px-6 py-4 border-b">
-                <Link href="/" className="flex items-center gap-2" onClick={() => setMobileOpen(false)}>
-                  <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#f59e0b] flex items-center justify-center">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                      <circle cx="6" cy="6" r="2.5" fill="white" />
-                      <circle cx="18" cy="6" r="2.5" fill="white" fillOpacity="0.8" />
-                      <circle cx="12" cy="12" r="2.5" fill="white" fillOpacity="0.9" />
-                      <circle cx="6" cy="18" r="2.5" fill="white" fillOpacity="0.7" />
-                      <circle cx="18" cy="18" r="2.5" fill="white" fillOpacity="0.6" />
-                    </svg>
-                  </div>
-                  <span className="text-xl font-bold tracking-tight text-text-primary">Elav</span>
+                <Link
+                  href="/"
+                  className="flex items-center"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <Image
+                    src="/images/logo-transparente.png"
+                    alt="Elav"
+                    width={112}
+                    height={28}
+                    className="h-7 w-auto"
+                  />
                 </Link>
                 <button
                   onClick={() => setMobileOpen(false)}
@@ -164,7 +188,11 @@ export function Navbar() {
                     <Link
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block px-4 py-3 text-base font-medium text-text-primary hover:bg-zinc-50 rounded-lg transition-colors"
+                      className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors ${
+                        pathname === link.href
+                          ? "text-[#7c3aed] bg-[#7c3aed]/5"
+                          : "text-text-primary hover:bg-zinc-50"
+                      }`}
                     >
                       {link.label}
                     </Link>

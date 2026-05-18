@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Heart } from "lucide-react";
 
 const footerLinks = {
@@ -23,17 +24,14 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
           <div className="col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#f59e0b] flex items-center justify-center">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <circle cx="6" cy="6" r="2.5" fill="white" />
-                  <circle cx="18" cy="6" r="2.5" fill="white" fillOpacity="0.8" />
-                  <circle cx="12" cy="12" r="2.5" fill="white" fillOpacity="0.9" />
-                  <circle cx="6" cy="18" r="2.5" fill="white" fillOpacity="0.7" />
-                  <circle cx="18" cy="18" r="2.5" fill="white" fillOpacity="0.6" />
-                </svg>
-              </div>
-              <span className="text-xl font-bold tracking-tight text-text-primary">Elav</span>
+            <Link href="/" className="flex items-center mb-4">
+              <Image
+                src="/images/logo-transparente.png"
+                alt="Elav"
+                width={140}
+                height={35}
+                className="h-9 w-auto"
+              />
             </Link>
             <p className="text-sm text-text-secondary max-w-xs leading-relaxed">
               El corazón inteligente de tu iglesia. Plataforma SaaS que centraliza la presencia digital, comunicación y administración en un solo lugar.
