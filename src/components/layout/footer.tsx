@@ -30,7 +30,7 @@ export function Footer() {
                 alt="Elav"
                 width={140}
                 height={35}
-                className="h-9 w-auto"
+                className="h-10 w-auto"
               />
             </Link>
             <p className="text-sm text-text-secondary max-w-xs leading-relaxed">
