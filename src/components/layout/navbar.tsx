@@ -176,7 +176,7 @@ export function Navbar() {
                     alt="Elav"
                     width={112}
                     height={28}
-                    className="h-7 w-auto"
+                    className="h-10 w-auto"
                   />
                 </Link>
                 <button
