@@ -56,7 +56,7 @@ export function WebsitesMockup() {
                 ))}
               </div>
 
-              <div className="px-4 pb-4 space-y-2">
+              <div className="px-4 pb-4 flex flex-col gap-2">
                 <div className="rounded-lg bg-zinc-50 p-3">
                   <p className="text-[11px] font-semibold text-zinc-700">Próximo servicio</p>
                   <p className="text-xs text-zinc-500 mt-0.5">Domingo 24 de Mayo — 9:00 AM y 11:30 AM</p>
@@ -134,7 +134,7 @@ export function WebsitesMockup() {
               <Search className="h-4 w-4 text-[#f59e0b]" />
               <p className="text-xs font-semibold text-zinc-700">SEO Optimizado</p>
             </div>
-            <div className="space-y-1.5">
+            <div className="flex flex-col gap-1.5">
               <div className="h-2 bg-zinc-100 rounded w-full" />
               <div className="h-2 bg-zinc-100 rounded w-3/4" />
               <div className="h-2 bg-[#7c3aed]/20 rounded w-1/2" />

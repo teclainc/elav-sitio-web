@@ -76,9 +76,36 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground focus:outline-none"
+        >
+          Saltar al contenido principal
+        </a>
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">{children}</main>
         <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Elav",
+              url: "https://elav.app",
+              logo: "https://elav.app/images/logo-transparente.png",
+              description:
+                "Plataforma SaaS para iglesias modernas. Sitio web, gesti\u00f3n de miembros, comunicaci\u00f3n y administraci\u00f3n en un solo lugar.",
+              sameAs: [],
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "hola@elav.app",
+                contactType: "customer service",
+                availableLanguage: ["es"],
+              },
+            }),
+          }}
+        />
       </body>
     </html>
   );

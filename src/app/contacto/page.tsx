@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SectionWrapper } from "@/components/sections";
+import { ContactForm } from "./contact-form";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Mail, Clock, MapPin } from "lucide-react";
 
@@ -30,89 +31,12 @@ export default function ContactoPage() {
       <SectionWrapper variant="alt">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           <div className="lg:col-span-3">
-            <h2 className="text-2xl font-bold tracking-tight text-text-primary mb-6">Envíanos un mensaje</h2>
-            <form className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-text-primary mb-1.5">
-                    Nombre
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/20 focus:border-[#7c3aed]/50 transition-all"
-                    placeholder="Tu nombre"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-text-primary mb-1.5">
-                    Correo electrónico
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/20 focus:border-[#7c3aed]/50 transition-all"
-                    placeholder="tu@email.com"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="church" className="block text-sm font-medium text-text-primary mb-1.5">
-                  Nombre de tu iglesia
-                </label>
-                <input
-                  type="text"
-                  id="church"
-                  name="church"
-                  className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/20 focus:border-[#7c3aed]/50 transition-all"
-                  placeholder="Iglesia Centro de Vida"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="role" className="block text-sm font-medium text-text-primary mb-1.5">
-                  Tu rol en la iglesia
-                </label>
-                <select
-                  id="role"
-                  name="role"
-                  className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/20 focus:border-[#7c3aed]/50 transition-all appearance-none"
-                  defaultValue=""
-                >
-                  <option value="" disabled>Selecciona tu rol</option>
-                  <option value="pastor">Pastor principal</option>
-                  <option value="pastor-asociado">Pastor asociado</option>
-                  <option value="lider">Líder de ministerio</option>
-                  <option value="admin">Administrador</option>
-                  <option value="otro">Otro</option>
-                </select>
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-text-primary mb-1.5">
-                  Mensaje
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/20 focus:border-[#7c3aed]/50 transition-all resize-none"
-                  placeholder="Cuéntanos sobre tu iglesia y cómo podemos ayudarte..."
-                />
-              </div>
-
-              <Button type="submit" variant="gradient" size="lg" className="w-full sm:w-auto">
-                Enviar mensaje
-              </Button>
-            </form>
+            <ContactForm />
           </div>
 
           <div className="lg:col-span-2">
             <h2 className="text-2xl font-bold tracking-tight text-text-primary mb-6">Otras formas de contactarnos</h2>
-            <div className="space-y-6">
+            <div className="flex flex-col gap-6">
               <div className="flex gap-4">
                 <div className="h-10 w-10 shrink-0 rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#f59e0b]/10 flex items-center justify-center">
                   <MessageCircle className="h-5 w-5 text-[#7c3aed]" />

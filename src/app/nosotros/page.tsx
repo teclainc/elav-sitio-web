@@ -33,7 +33,7 @@ export default function NosotrosPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-text-primary sm:text-4xl">¿Por qué nació Elav?</h2>
-            <div className="mt-6 space-y-4 text-text-secondary leading-relaxed">
+            <div className="mt-6 flex flex-col gap-4 text-text-secondary leading-relaxed">
               <p>
                 Vimos de primera mano cómo las iglesias luchan con herramientas que no fueron diseñadas para ellas. 
                 Pastores usando Excel para llevar membresías, líderes manejando todo por WhatsApp, finanzas en cuadernos 
@@ -53,7 +53,7 @@ export default function NosotrosPage() {
 
           <div className="relative">
             <div className="rounded-2xl bg-gradient-to-br from-[#7c3aed]/10 via-white to-[#f59e0b]/10 border border-zinc-200/60 p-8">
-              <div className="space-y-6">
+              <div className="flex flex-col gap-6">
                 {[
                   { icon: Heart, title: "Nuestra pasión", desc: "Ayudar a las iglesias a ser más efectivas en su misión a través de herramientas tecnológicas bien diseñadas." },
                   { icon: Target, title: "Nuestro enfoque", desc: "Crear software que se sienta humano, cercano y fácil de usar. La tecnología debe servir, no complicar." },
@@ -102,7 +102,7 @@ export default function NosotrosPage() {
         </div>
         <div className="max-w-3xl mx-auto">
           <div className="rounded-2xl bg-gradient-to-br from-[#7c3aed]/5 via-white to-[#f59e0b]/5 border border-zinc-200/60 p-8 lg:p-10">
-            <div className="space-y-5 text-text-secondary leading-relaxed">
+            <div className="flex flex-col gap-5 text-text-secondary leading-relaxed">
               <p>
                 <strong className="text-text-primary">Creemos en la iglesia local.</strong> Es la esperanza del mundo. 
                 Y creemos que merece herramientas a la altura de su llamado, no las sobras tecnológicas que nadie más quiere usar.

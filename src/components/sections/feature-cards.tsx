@@ -105,7 +105,7 @@ export function PricingCard({ name, description, price, period, features, cta, p
         </div>
       </div>
 
-      <ul className="space-y-3 mb-8">
+      <ul className="flex flex-col gap-3 mb-8">
         {features.map((feature) => (
           <li key={feature} className="flex items-start gap-3 text-sm text-text-secondary">
             <svg className="h-5 w-5 text-emerald-500 shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">

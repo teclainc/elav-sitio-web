@@ -84,7 +84,7 @@ export function AnalyticsMockup() {
                 <Activity className="h-4 w-4 text-[#f59e0b]" />
                 <p className="text-sm font-semibold text-zinc-700">Distribución por campus</p>
               </div>
-              <div className="space-y-3">
+              <div className="flex flex-col gap-3">
                 {[
                   { label: "Campus Central", value: 62, color: "#7c3aed" },
                   { label: "Campus Norte", value: 24, color: "#8b5cf6" },

@@ -90,7 +90,7 @@ export function DashboardMockup() {
               className="rounded-xl border border-zinc-100 bg-white p-5"
             >
               <p className="text-sm font-semibold text-zinc-700 mb-4">Eventos próximos</p>
-              <div className="space-y-3">
+              <div className="flex flex-col gap-3">
                 {[
                   { name: "Servicio Dominical", date: "Dom 9:00 AM", color: "bg-[#7c3aed]/10 text-[#7c3aed]" },
                   { name: "Reunión de líderes", date: "Lun 7:00 PM", color: "bg-[#f59e0b]/10 text-[#f59e0b]" },
